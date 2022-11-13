@@ -5,18 +5,12 @@ import {
   Filter,
   FilterExcludingWhere,
   repository,
-  Where,
+  Where
 } from '@loopback/repository';
 import {
-  post,
-  param,
-  get,
-  getModelSchemaRef,
-  patch,
-  put,
-  del,
-  requestBody,
-  response,
+  del, get,
+  getModelSchemaRef, param, patch, post, put, requestBody,
+  response
 } from '@loopback/rest';
 import {Producto} from '../models';
 import {ProductoRepository} from '../repositories';
@@ -25,8 +19,8 @@ import {ProductoRepository} from '../repositories';
 export class ProductoController {
   constructor(
     @repository(ProductoRepository)
-    public productoRepository : ProductoRepository,
-  ) {}
+    public productoRepository: ProductoRepository,
+  ) { }
 
 
 
@@ -50,7 +44,7 @@ export class ProductoController {
   ): Promise<Producto> {
     return this.productoRepository.create(producto);
   }
-  @authenticate.skip()
+
   @get('/productos/count')
   @response(200, {
     description: 'Producto model count',
@@ -61,7 +55,7 @@ export class ProductoController {
   ): Promise<Count> {
     return this.productoRepository.count(where);
   }
-
+  @authenticate.skip()
   @get('/productos')
   @response(200, {
     description: 'Array of Producto model instances',
@@ -98,7 +92,7 @@ export class ProductoController {
   ): Promise<Count> {
     return this.productoRepository.updateAll(producto, where);
   }
-
+  @authenticate.skip()
   @get('/productos/{id}')
   @response(200, {
     description: 'Producto model instance',

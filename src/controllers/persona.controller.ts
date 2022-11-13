@@ -41,7 +41,7 @@ export class PersonaController {
 })
 async identificarPersona(
   @requestBody() Credenciales: Credenciales
-){
+): Promise<{datos: {nombre: string; correo: string; id: string | undefined;}; tk: any;}>{
 let p = await this.servicioAutenticacion.IdentificarPersona(Credenciales.usuario, Credenciales.clave);
 if (p){
 let token = this.servicioAutenticacion.GenerarTokenJWT(p);
